@@ -1,0 +1,72 @@
+<% include ../partials/header%>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <p class="lead">La memeria</p>
+            <div class="list-group">
+                <li class="list-group-item active"> Info 1</li>
+                <li class="list-group-item"> Info 2</li>
+                <li class="list-group-item"> Info 3</li>
+            </div>
+        </div>
+         <div class="container">
+            <div class="row">
+                <div class="col-md-9">
+                    <div class="thumbnail">
+                        <img class="img-responsive" src="<%= memes.image %>"  >
+                        <div class="caption">
+                            <h4><a><%=memes.name%></a></h4>
+                            <p><%= memes.description%></p>
+                            <p>
+                                <em>Submited by <%= memes.author.username%></em>
+                            </p>
+                            <%if(currentUser && memes.author.id.equals(currentUser._id)){%>
+                                <a href="/memes/<%=memes._id%>/edit" class="btn btn-warning">Edit meme</a>
+                                <form class="deleteForm" action="/memes/<%=memes.id%>?_method=DELETE" method="POST">
+                                    <button class="btn btn-danger">
+                                        Delete meme
+                                    </button>
+                                </form>
+                            <%}%>
+                        </div>
+                    </div>
+                    <div class="well">
+                        <div class="text-right">
+                            <a class="btn btn-danger" href="/memes/<%=memes._id%>/comments/new">Add new comment</a>
+                        </div>
+                        <hr>
+                        <% memes.comments.forEach(function(comment){ %>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <strong><%=comment.author.username%></strong>
+                                <span class="pull-right">
+                                    10 days ago
+                                </span>
+                                <p><%= comment.text %></p>
+                                <%if(currentUser && comment.author.id.equals(currentUser._id)){%>
+                                <a class="btn btn-xs btn-warning" href="/memes/<%=memes.id%>/comments/<%=comment._id%>/edit">
+                                Edit comment
+                                </a>
+                                <form class="deleteForm" action="/memes/<%=memes.id%>/comments/<%=comment.id%>?_method=DELETE" method="POST">
+                                    <input  type="submit" class="btn btn-xs btn-danger" value="Delete">
+                                    
+                                </form>
+                                <%}%>
+                            </div>
+                        </div>
+                        <%})%>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+</div>
+
+
+<% include ../partials/footer%>
+
+<a href="/memes">Go Back</a>

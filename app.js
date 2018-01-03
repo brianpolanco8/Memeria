@@ -31,8 +31,9 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-mongoose.connect ("mongodb://brian:candy@ds137957.mlab.com:37957/memeria");
-// mongoose.connect('mongodb://localhost/memeria_v12');
+
+mongoose.connect(process.env.DATABASEURL);
+// mongoose.connect("mongodb://brian:candy@ds137957.mlab.com:37957/memeria");
 
 
 var Meme = require("./models/meme.js")

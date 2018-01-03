@@ -31,8 +31,8 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-
-mongoose.connect(process.env.DATABASEURL);
+var url = process.env.DATABASEURL
+mongoose.connect(url);
 // mongoose.connect("mongodb://brian:candy@ds137957.mlab.com:37957/memeria");
 
 

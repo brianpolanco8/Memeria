@@ -33,7 +33,7 @@ passport.deserializeUser(User.deserializeUser());
 
 var url = process.env.DATABASEURL
 mongoose.connect(url);
-// mongoose.connect("mongodb://brian:candy@ds137957.mlab.com:37957/memeria");
+
 
 
 var Meme = require("./models/meme.js")
